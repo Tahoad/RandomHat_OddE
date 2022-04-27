@@ -11,22 +11,34 @@ namespace RandomHat_OddE
     {
         Student stdnt = new Student();
         List<Student> lstStudent = new List<Student>();
-        List<Student> lstGroup1 = new List<Student>();
-        List<Student> lstGroup2 = new List<Student>();
-        List<Student> lstGroup3 = new List<Student>();
-        List<Student> lstGroup4 = new List<Student>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //reset textbox string
+            ClearTextbox();
             if (!IsPostBack)
             {
                 pnlRandom.Style.Add("display", "block");
                 pnlAllocated.Style.Add("display", "none");
             }
         }
+        public void ClearTextbox()
+        {
+            txtGroup1_Member_Count.Text = String.Empty;
+            txtGroup1_Member_Name.Text = String.Empty;
+            txtGroup2_Member_Count.Text = String.Empty;
+            txtGroup2_Member_Name.Text = String.Empty;
+            txtGroup3_Member_Count.Text = String.Empty;
+            txtGroup3_Member_Name.Text = String.Empty;
+            txtGroup4_Member_Count.Text = String.Empty;
+            txtGroup4_Member_Name.Text = String.Empty;
+            txtRandomNumber.Text = String.Empty;
+        }
 
         protected void btnRandom_Click(object sender, EventArgs e)
         {
-            lstStudent = stdnt.getStudent().Take(50).ToList();
+            Random rnd = new Random();
+            //get random 50 student from student class
+            lstStudent = stdnt.getStudent().OrderBy(x=> rnd.Next()).Take(50).ToList();
             AllocateStudent(lstStudent);
             OpenPnlAllocate();
         }
@@ -34,6 +46,17 @@ namespace RandomHat_OddE
         {
             pnlRandom.Style.Add("display", "none");
             pnlAllocated.Style.Add("display", "block");
+        }
+        private static Random random;
+        private static object syncObj = new object();
+        private static int GenerateRandomNumber(int min, int max)
+        {
+            lock (syncObj)
+            {
+                if (random == null)
+                    random = new Random(); // Or exception...
+                return random.Next(min, max);
+            }
         }
         public void AllocateStudent(List<Student> lstStudent)
         {
@@ -45,59 +68,56 @@ namespace RandomHat_OddE
                 do
                 {
                     //random group number
-                    Random rnd = new Random();
-                    int RandNumber = rnd.Next(12, 50);
+                    Random rnd = new Random(DateTime.Now.Second);
+                    int RandNumber = GenerateRandomNumber(12, 50);
+                    txtRandomNumber.Text += RandNumber.ToString() + "\n";
+                    txtRandomNumber.Visible = false;
                     GroupNumber = (int)Math.Floor(Convert.ToDecimal(lstStudent.Count() / RandNumber));
                 }
                 while (IsGroupAlreadyFull(GroupNumber)); //check is group full then random new group number
-
                 //if group is not full then add student in group
                 i.GroupId = GroupNumber;
-                //switch (GroupNumber)
-                //{
-                //    case 1:
-                //        {
-                //            lstGroup1.Add(i);
-                //        }
-                //        break;
-                //    case 2:
-                //        {
-                //            lstGroup2.Add(i);
-                //        }
-                //        break;
-                //    case 3:
-                //        {
-                //            lstGroup3.Add(i);
-                //        }
-                //        break;
-                //    case 4:
-                //        {
-                //            lstGroup4.Add(i);
-                //        }
-                //        break;
-                //}
+
+                //add name of student in text area
+                switch (GroupNumber)
+                {
+                    case 1:
+                        txtGroup1_Member_Name.Text += i.name + "\n";
+                        break;
+                    case 2:
+                        txtGroup2_Member_Name.Text += i.name + "\n";
+                        break;
+                    case 3:
+                        txtGroup3_Member_Name.Text += i.name + "\n";
+                        break;
+                    case 4:
+                        txtGroup4_Member_Name.Text += i.name + "\n";
+                        break;
+                }
             }
-            //txtGroup1_Gryffindor.Text = lstGroup1.Count.ToString();
-            //txtGroup2_Hufflepuff.Text = lstGroup2.Count.ToString();
-            //txtGroup3_Ravenclaw.Text = lstGroup3.Count.ToString();
-            //txtGroup4_Slytherin.Text = lstGroup4.Count.ToString();
-            txtGroup1_Gryffindor.Text = lstStudent.Count(x => x.GroupId == 1).ToString();
-            txtGroup2_Hufflepuff.Text = lstStudent.Count(x => x.GroupId == 2).ToString();
-            txtGroup3_Ravenclaw.Text = lstStudent.Count(x => x.GroupId == 3).ToString();
-            txtGroup4_Slytherin.Text = lstStudent.Count(x => x.GroupId == 4).ToString();
+            txtGroup1_Member_Count.Text = "Gryffindor Members : " + lstStudent.Count(x => x.GroupId == 1).ToString();
+            txtGroup2_Member_Count.Text = "Hufflepuff Members : " + lstStudent.Count(x => x.GroupId == 2).ToString();
+            txtGroup3_Member_Count.Text = "Ravenclaws Members : " + lstStudent.Count(x => x.GroupId == 3).ToString();
+            txtGroup4_Member_Count.Text = "Slytherins Members : " + lstStudent.Count(x => x.GroupId == 4).ToString();
         }
         public bool IsGroupAlreadyFull(int GroupNumber)
         {
-            int MaxMemberInGroup = 15;
-            if (GroupNumber == 1 && lstGroup1.Count() > MaxMemberInGroup)
+            int MaxMemberInGroup = 12;
+            if (GroupNumber == 1 && lstStudent.Count(x => x.GroupId == 1) > MaxMemberInGroup)
                 return true;
-            if (GroupNumber == 2 && lstGroup2.Count() > MaxMemberInGroup)
+            if (GroupNumber == 2 && lstStudent.Count(x => x.GroupId == 2) > MaxMemberInGroup)
                 return true;
-            if (GroupNumber == 3 && lstGroup3.Count() > MaxMemberInGroup)
+            if (GroupNumber == 3 && lstStudent.Count(x => x.GroupId == 3) > MaxMemberInGroup)
                 return true;
-            if (GroupNumber == 4 && lstGroup4.Count() > MaxMemberInGroup)
+            if (GroupNumber == 4 && lstStudent.Count(x => x.GroupId == 4) > MaxMemberInGroup)
                 return true;
             return false;
+        }
+
+        protected void btnClosePnlAllocated_Click(object sender, EventArgs e)
+        {
+            pnlAllocated.Style.Add("display", "none");
+            pnlRandom.Style.Add("display", "block");
         }
     }
 }
