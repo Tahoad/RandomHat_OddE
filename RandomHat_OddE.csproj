@@ -67,7 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\Gryffindor.png" />
+    <Content Include="assets\images\Hufflepuff.png" />
     <Content Include="assets\images\random_hat.png" />
+    <Content Include="assets\images\RavenClaw.png" />
+    <Content Include="assets\images\Slytherin.png" />
     <Content Include="Mainpage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>

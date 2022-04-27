@@ -51,39 +51,93 @@ namespace RandomHat_OddE
         protected global::System.Web.UI.WebControls.Panel pnlAllocated;
 
         /// <summary>
-        /// txtGroup1_Gryffindor control.
+        /// btnClosePnlAllocated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGroup1_Gryffindor;
+        protected global::System.Web.UI.WebControls.Button btnClosePnlAllocated;
 
         /// <summary>
-        /// txtGroup2_Hufflepuff control.
+        /// txtGroup1_Member_Count control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGroup2_Hufflepuff;
+        protected global::System.Web.UI.WebControls.TextBox txtGroup1_Member_Count;
 
         /// <summary>
-        /// txtGroup3_Ravenclaw control.
+        /// txtGroup1_Member_Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGroup3_Ravenclaw;
+        protected global::System.Web.UI.WebControls.TextBox txtGroup1_Member_Name;
 
         /// <summary>
-        /// txtGroup4_Slytherin control.
+        /// txtGroup2_Member_Count control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGroup4_Slytherin;
+        protected global::System.Web.UI.WebControls.TextBox txtGroup2_Member_Count;
+
+        /// <summary>
+        /// txtGroup2_Member_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGroup2_Member_Name;
+
+        /// <summary>
+        /// txtGroup3_Member_Count control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGroup3_Member_Count;
+
+        /// <summary>
+        /// txtGroup3_Member_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGroup3_Member_Name;
+
+        /// <summary>
+        /// txtGroup4_Member_Count control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGroup4_Member_Count;
+
+        /// <summary>
+        /// txtGroup4_Member_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGroup4_Member_Name;
+
+        /// <summary>
+        /// txtRandomNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRandomNumber;
     }
 }
